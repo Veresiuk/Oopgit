@@ -8,13 +8,13 @@ int main() {
     }
 
     Price total{0, 0}; 
-    int h, k, quantity;
+     int h, quantity;
+     short int k;
     
     while (file >> h >> k >> quantity) {
-        Price item{h, static_cast<short>(k)};
-        Price temp; 
-        multiply(temp, item, quantity);
-        add(total, total, temp);
+        Price item{h, k};
+        multiply(item, quantity);
+        add(total, item);
     }
     
     file.close();

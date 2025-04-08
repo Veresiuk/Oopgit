@@ -8,11 +8,11 @@ using namespace std;
 
 struct Price {
     int hryvnias;
-    short kopiykas;
+    short int kopiykas;
 };
 
-void add(Price& result, const Price& a, const Price& b);
-void multiply(Price& result, const Price& price, int quantity);
+void add(Price& a, const Price& b);
+void multiply(Price& price, int quantity);
 void round(Price& price);
 void print(const Price& price);
 
