@@ -13,6 +13,12 @@ int main() {
         cout << "The triangle is degenerate.\n";
     }
 
+    int method;
+    cout << "Choose method to check if a point belongs to triangle:\n";
+    cout << "1 - Vector method\n";
+    cout << "2 - Area method\n";
+    cin >> method;
+
     int n;
     cout << "How many points do you want to check? ";
     cin >> n;
@@ -22,12 +28,17 @@ int main() {
         cout << "Enter point " << i + 1 << " (x y): ";
         cin >> p.x >> p.y;
 
-        if (t.contains(p)) {
-            cout << "The point is inside the triangle\n";
+        bool inside = t.contains(p);
+        bool onEdge = isPointOnEdge(t.A, t.B, p) || isPointOnEdge(t.B, t.C, p) || isPointOnEdge(t.C, t.A, p);
+
+        if (inside && onEdge) {
+            cout << "The point is ON the edge of the triangle\n";
+        } else if (inside) {
+            cout << "The point is INSIDE the triangle\n";
         } else {
-            cout << "The point is NOT inside the triangle\n";
+            cout << "The point is OUTSIDE the triangle\n";
         }
-    }
+    }  
 
     return 0;
 }

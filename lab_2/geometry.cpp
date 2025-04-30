@@ -11,7 +11,7 @@ double cross(const Point& A, const Point& B, const Point& C) {
 
 bool isPointOnEdge(const Point& A, const Point& B, const Point& P) {
     double cp = cross(A, B, P);
-    if (fabs(cp) > 1e-9) return false;
+    if (fabs(cp) > 1e-4) return false;
 
     double dotproduct = (P.x - A.x) * (B.x - A.x) + (P.y - A.y) * (B.y - A.y);
     if (dotproduct < 0) return false;
@@ -27,7 +27,7 @@ double Triangle::area() const {
 }
 
 bool Triangle::isDegenerate() const {
-    return area() < 1e-9;
+    return area() < 1e-4;
 }
 
 bool vectorMethodContains(const Triangle& t, const Point& p) {
@@ -44,5 +44,8 @@ bool vectorMethodContains(const Triangle& t, const Point& p) {
 }
 
 bool Triangle::contains(const Point& P) const {
+    if (isDegenerate()) {
+        return isPointOnEdge(A, B, P) || isPointOnEdge(B, C, P) || isPointOnEdge(C, A, P);
+    }
     return vectorMethodContains(*this, P);
 }
